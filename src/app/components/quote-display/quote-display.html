@@ -1,0 +1,127 @@
+<div class="quote-wrapper" *ngIf="quote() as q">
+  <header class="app-header">Lumina</header>
+
+  <div class="quote-container">
+    <!-- Quote Text -->
+    <div class="quote-content">
+      <div class="quote-number">#{{ quote()?.number }}</div>
+      <div class="quote-graphic">
+        <span class="line"></span>
+        <i class="fa-solid fa-quote-left"></i>
+        <span class="line"></span>
+      </div>
+      <p class="quote-text" [@fadeAnimation]="quote()?.id">
+        {{ quote()?.content }}
+      </p>
+      <p class="quote-author">{{ q.author }}</p>
+      <div class="quote-categories">
+        <span *ngFor="let cat of q.categories" class="hashtag" [class.active]="(activeCategory$ | async) === cat"
+          (click)="toggleCategory(cat)"
+          [attr.title]="(activeCategory$ | async) === cat ? 'Unlock category' : 'Lock to this category'">
+          #{{ cat }}
+          <i class="fa-solid fa-lock" *ngIf="(activeCategory$ | async) === cat"
+            style="font-size: 0.7em; margin-left: 4px;"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- Next Quote Button -->
+    <div class="next-button-wrapper">
+      <button class="btn-next" (click)="loadNewQuote()">
+        Next quote <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- Icon Bar -->
+    <div class="icon-bar">
+      <!-- Theme Toggle -->
+      <button (click)="themeService.toggleTheme()" class="btn-icon" [attr.data-tooltip]="
+          themeService.isDarkMode()
+            ? 'Switch to Light Mode'
+            : 'Switch to Dark Mode'
+        ">
+        <i class="fa-solid" [ngClass]="themeService.isDarkMode() ? 'fa-sun' : 'fa-moon'"></i>
+      </button>
+
+      <!-- Filter Toggle -->
+      <button (click)="toggleFilter()" class="btn-icon" data-tooltip="Browse Categories"
+        [class.active]="(activeCategory$ | async)">
+        <i class="fa-solid fa-filter"></i>
+      </button>
+
+      <!-- Share Menu -->
+      <div class="share-wrapper">
+        <button (click)="toggleShareMenu($event)" class="btn-icon" data-tooltip="Share Quote"
+          [class.active]="isShareMenuOpen()">
+          <i class="fa-solid fa-share"></i>
+        </button>
+
+        <div class="share-menu" *ngIf="isShareMenuOpen()" (click)="$event.stopPropagation()">
+          <button (click)="copyLink(); toggleShareMenu()">
+            <i class="fa-solid fa-link"></i> Copy Link
+          </button>
+          <button (click)="shareOnTwitter(); toggleShareMenu()">
+            <i class="fa-brands fa-x-twitter"></i> Post to X
+          </button>
+          <button (click)="shareOnInstagram(); toggleShareMenu()">
+            <i class="fa-brands fa-instagram"></i> Post to
+            Instagram
+          </button>
+          <button (click)="shareOnPinterest(); toggleShareMenu()">
+            <i class="fa-brands fa-pinterest"></i> Post to
+            Pinterest
+          </button>
+        </div>
+      </div>
+
+      <!-- Wallpaper Download -->
+      <button (click)="downloadWallpaper()" class="btn-icon" data-tooltip="Download Wallpaper">
+        <i class="fa-solid fa-arrow-down"></i>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button (click)="toggleFullscreen()" class="btn-fullscreen" [attr.data-tooltip]="
+          isFullscreen() ? 'Exit Fullscreen' : 'Enter Fullscreen'
+        ">
+        <i class="fa-solid" [ngClass]="isFullscreen() ? 'fa-compress' : 'fa-expand'"></i>
+      </button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="copyright">&copy; {{ currentYear }} jtp-development</span>
+    <span class="divider">|</span>
+    <a routerLink="/about">about</a>
+    <span class="divider">|</span>
+    <a routerLink="/contact">contact</a>
+    <span class="divider">|</span>
+    <a routerLink="/submit">submit a quote</a>
+    <span class="divider">|</span>
+    <a routerLink="/privacy">privacy policy</a>
+  </footer>
+
+  <!-- Category Overlay -->
+  <div class="category-overlay-backdrop" *ngIf="isFilterOpen()" (click)="closeFilter()">
+    <div class="category-overlay-content" (click)="$event.stopPropagation()">
+      <div class="overlay-header">
+        <h2>Explore Categories</h2>
+        <button class="btn-close" (click)="closeFilter()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="category-grid">
+        <span class="hashtag" [class.active]="(activeCategory$ | async) === null" (click)="selectCategory(null!)"
+          style="justify-content: center;">
+          All Quotes
+        </span>
+        <span *ngFor="let cat of allCategories$ | async" class="hashtag"
+          [class.active]="(activeCategory$ | async) === cat" (click)="selectCategory(cat)">
+          #{{ cat }}
+          <i class="fa-solid fa-lock" *ngIf="(activeCategory$ | async) === cat"
+            style="font-size: 0.7em; margin-left: 4px;"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

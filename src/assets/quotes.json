@@ -1,0 +1,402 @@
+[
+  {
+    "id": "x7K9p2",
+    "number": 1,
+    "content": "The only limit to our realization of tomorrow is our doubts of today.",
+    "author": "Franklin D. Roosevelt",
+    "categories": [
+      "Inspiration",
+      "Future"
+    ]
+  },
+  {
+    "id": "m3N5d1",
+    "number": 2,
+    "content": "Do what you can, with what you have, where you are.",
+    "author": "Theodore Roosevelt",
+    "categories": [
+      "Action",
+      "Resourcefulness"
+    ]
+  },
+  {
+    "id": "9jR2v8",
+    "number": 3,
+    "content": "Act as if what you do makes a difference. It does.",
+    "author": "William James",
+    "categories": [
+      "Purpose",
+      "Motivation"
+    ]
+  },
+  {
+    "id": "b4L1z0",
+    "number": 4,
+    "content": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "author": "Winston Churchill",
+    "categories": [
+      "Success",
+      "Resilience"
+    ]
+  },
+  {
+    "id": "q5W8e3",
+    "number": 5,
+    "content": "Believe you can and you're halfway there.",
+    "author": "Theodore Roosevelt",
+    "categories": [
+      "Belief",
+      "Confidence"
+    ]
+  },
+  {
+    "id": "y2H6n7",
+    "number": 6,
+    "content": "The best way to predict the future is to create it.",
+    "author": "Peter Drucker",
+    "categories": [
+      "Future",
+      "Innovation"
+    ]
+  },
+  {
+    "id": "f9G4k1",
+    "number": 7,
+    "content": "Everything you've ever wanted is on the other side of fear.",
+    "author": "George Addair",
+    "categories": [
+      "Courage",
+      "Growth"
+    ]
+  },
+  {
+    "id": "c8J3m5",
+    "number": 8,
+    "content": "Happiness depends upon ourselves.",
+    "author": "Aristotle",
+    "categories": [
+      "Happiness",
+      "Wisdom"
+    ]
+  },
+  {
+    "id": "p1L9t4",
+    "number": 9,
+    "content": "Be yourself; everyone else is already taken.",
+    "author": "Oscar Wilde",
+    "categories": [
+      "Authenticity",
+      "Humor"
+    ]
+  },
+  {
+    "id": "h6B2v9",
+    "number": 10,
+    "content": "So many books, so little time.",
+    "author": "Frank Zappa",
+    "categories": [
+      "Books",
+      "Life"
+    ]
+  },
+  {
+    "id": "d3X7r5",
+    "number": 11,
+    "content": "A room without books is like a body without a soul.",
+    "author": "Marcus Tullius Cicero",
+    "categories": [
+      "Books",
+      "Soul"
+    ]
+  },
+  {
+    "id": "s8K1n2",
+    "number": 12,
+    "content": "You only live once, but if you do it right, once is enough.",
+    "author": "Mae West",
+    "categories": [
+      "Life",
+      "Humor"
+    ]
+  },
+  {
+    "id": "g4M6p8",
+    "number": 13,
+    "content": "Be the change that you wish to see in the world.",
+    "author": "Mahatma Gandhi",
+    "categories": [
+      "Change",
+      "Leadership"
+    ]
+  },
+  {
+    "id": "v9J3l0",
+    "number": 14,
+    "content": "In three words I can sum up everything I've learned about life: it goes on.",
+    "author": "Robert Frost",
+    "categories": [
+      "Life",
+      "Acceptance"
+    ]
+  },
+  {
+    "id": "t2R5y7",
+    "number": 15,
+    "content": "If you tell the truth, you don't have to remember anything.",
+    "author": "Mark Twain",
+    "categories": [
+      "Truth",
+      "Integrity"
+    ]
+  },
+  {
+    "id": "w6Q1z4",
+    "number": 16,
+    "content": "A friend is someone who knows all about you and still loves you.",
+    "author": "Elbert Hubbard",
+    "categories": [
+      "Friendship",
+      "Love"
+    ]
+  },
+  {
+    "id": "n3P8k2",
+    "number": 17,
+    "content": "To live is the rarest thing in the world. Most people exist, that is all.",
+    "author": "Oscar Wilde",
+    "categories": [
+      "Life",
+      "Philosophy"
+    ]
+  },
+  {
+    "id": "k5L9j1",
+    "number": 18,
+    "content": "Always forgive your enemies; nothing annoys them so much.",
+    "author": "Oscar Wilde",
+    "categories": [
+      "Forgiveness",
+      "Wit"
+    ]
+  },
+  {
+    "id": "r7M2x6",
+    "number": 19,
+    "content": "Live as if you were to die tomorrow. Learn as if you were to live forever.",
+    "author": "Mahatma Gandhi",
+    "categories": [
+      "Learning",
+      "Life"
+    ]
+  },
+  {
+    "id": "z1N4h8",
+    "number": 20,
+    "content": "We accept the love we think we deserve.",
+    "author": "Stephen Chbosky",
+    "categories": [
+      "Love",
+      "Relationships"
+    ]
+  },
+  {
+    "id": "a1B2c3",
+    "number": 21,
+    "content": "The person who says it cannot be done should not interrupt the person who is doing it.",
+    "author": "Chinese Proverb",
+    "categories": [
+      "Determination",
+      "Action"
+    ]
+  },
+  {
+    "id": "d4E5f6",
+    "number": 22,
+    "content": "I have not failed. I've just found 10,000 ways that won't work.",
+    "author": "Thomas A. Edison",
+    "categories": [
+      "Perseverance",
+      "Innovation"
+    ]
+  },
+  {
+    "id": "g7H8i9",
+    "number": 23,
+    "content": "It is never too late to be what you might have been.",
+    "author": "George Eliot",
+    "categories": [
+      "Potential",
+      "Regret"
+    ]
+  },
+  {
+    "id": "j0K1l2",
+    "number": 24,
+    "content": "Everything has beauty, but not everyone can see.",
+    "author": "Confucius",
+    "categories": [
+      "Beauty",
+      "Perception"
+    ]
+  },
+  {
+    "id": "m3N4o5",
+    "number": 25,
+    "content": "Life is what happens when you're busy making other plans.",
+    "author": "John Lennon",
+    "categories": [
+      "Life",
+      "Fate"
+    ]
+  },
+  {
+    "id": "p6Q7r8",
+    "number": 26,
+    "content": "The unexamined life is not worth living.",
+    "author": "Socrates",
+    "categories": [
+      "Philosophy",
+      "Self-Reflection"
+    ]
+  },
+  {
+    "id": "s9T0u1",
+    "number": 27,
+    "content": "What we think, we become.",
+    "author": "Buddha",
+    "categories": [
+      "Mindset",
+      "Spirituality"
+    ]
+  },
+  {
+    "id": "v2W3x4",
+    "number": 28,
+    "content": "The best revenge is massive success.",
+    "author": "Frank Sinatra",
+    "categories": [
+      "Success",
+      "Revenge"
+    ]
+  },
+  {
+    "id": "y5Z6a7",
+    "number": 29,
+    "content": "Dream big and dare to fail.",
+    "author": "Norman Vaughan",
+    "categories": [
+      "Dreams",
+      "Courage"
+    ]
+  },
+  {
+    "id": "b8C9d0",
+    "number": 30,
+    "content": "Change your thoughts and you change your world.",
+    "author": "Norman Vincent Peale",
+    "categories": [
+      "Mindset",
+      "Change"
+    ]
+  },
+  {
+    "id": "e1F2g3",
+    "number": 31,
+    "content": "It does not matter how slowly you go as long as you do not stop.",
+    "author": "Confucius",
+    "categories": [
+      "Persistence",
+      "Patience"
+    ]
+  },
+  {
+    "id": "h4I5j6",
+    "number": 32,
+    "content": "If you can dream it, you can do it.",
+    "author": "Walt Disney",
+    "categories": [
+      "Dreams",
+      "Creativity"
+    ]
+  },
+  {
+    "id": "k7L8m9",
+    "number": 33,
+    "content": "The only way to do great work is to love what you do.",
+    "author": "Steve Jobs",
+    "categories": [
+      "Work",
+      "Passion"
+    ]
+  },
+  {
+    "id": "n0O1p2",
+    "number": 34,
+    "content": "The journey of a thousand miles begins with one step.",
+    "author": "Lao Tzu",
+    "categories": [
+      "Journey",
+      "Beginnings"
+    ]
+  },
+  {
+    "id": "q3R4s5",
+    "number": 35,
+    "content": "That which does not kill us makes us stronger.",
+    "author": "Friedrich Nietzsche",
+    "categories": [
+      "Strength",
+      "Resilience"
+    ]
+  },
+  {
+    "id": "t6U7v8",
+    "number": 36,
+    "content": "Life is really simple, but we insist on making it complicated.",
+    "author": "Confucius",
+    "categories": [
+      "Simplicity",
+      "Life"
+    ]
+  },
+  {
+    "id": "w9X0y1",
+    "number": 37,
+    "content": "May you live all the days of your life.",
+    "author": "Jonathan Swift",
+    "categories": [
+      "Life",
+      "Blessing"
+    ]
+  },
+  {
+    "id": "z2A3b4",
+    "number": 38,
+    "content": "Life itself is the most wonderful fairy tale.",
+    "author": "Hans Christian Andersen",
+    "categories": [
+      "Life",
+      "Adventure"
+    ]
+  },
+  {
+    "id": "c5D6e7",
+    "number": 39,
+    "content": "Do not let making a living prevent you from making a life.",
+    "author": "John Wooden",
+    "categories": [
+      "Work-Life Balance",
+      "Wisdom"
+    ]
+  },
+  {
+    "id": "f8G9h0",
+    "number": 40,
+    "content": "Love the life you live. Live the life you love.",
+    "author": "Bob Marley",
+    "categories": [
+      "Love",
+      "Life"
+    ]
+  }
+]

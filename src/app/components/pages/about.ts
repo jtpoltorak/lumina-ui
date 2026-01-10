@@ -1,0 +1,67 @@
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  standalone: true,
+  imports: [RouterLink],
+  template: `
+    <div class="page-container">
+      <a
+        routerLink="/"
+        class="back-link"
+        ><i class="fa-solid fa-arrow-left"></i> Back to Quotes</a
+      >
+      <h1>About Lumina</h1>
+      <p>
+        Lumina is a minimalist quote application designed to
+        inspire and delight.
+      </p>
+      <p>
+        Our mission is to cure the blank page syndrome and bring
+        a moment of reflection to your day.
+      </p>
+      <p>
+        Built with Angular, SCSS, and a passion for clean design.
+      </p>
+    </div>
+  `,
+  styles: [
+    `
+      .page-container {
+        padding: 40px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--color-text-primary);
+        font-family: 'Barlow', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s;
+      }
+      .back-link:hover {
+        opacity: 0.8;
+      }
+      h1 {
+        font-weight: 300;
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+      }
+      p {
+        line-height: 1.6;
+        opacity: 0.8;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+    `,
+  ],
+})
+export class AboutComponent {}

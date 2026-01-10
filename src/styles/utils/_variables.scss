@@ -1,0 +1,44 @@
+// CSS Custom Properties for Theming
+:root {
+  // Dark Theme (Default)
+  --color-bg-primary: #121212; // Very Dark Gray / Black
+  --color-text-primary: #ffffff; // White
+  --color-text-secondary: #cccccc; // Light Gray
+  --color-accent: #e2773a; // Orange
+  --color-icon-inactive: #888888; // Medium Gray
+  --color-icon-hover: #e2773a; // Orange
+  --color-bar-bg: #2c2c2c; // Dark Gray
+  --color-shadow: rgba(255, 255, 255, 0.1); // Subtle white glow
+}
+
+[data-theme='light'] {
+  --color-bg-primary: #ffffff;
+  --color-text-primary: #0c0f1e; // Black
+  --color-text-secondary: #6b504c; // Brown
+  --color-accent: #e2773a; // Orange
+  --color-icon-inactive: #143041; // Navy
+  --color-icon-hover: #e2773a; // Orange
+  --color-bar-bg: #f0f0f0;
+  --color-shadow: rgba(0, 0, 0, 0.2); // Standard dark shadow
+}
+
+// SCSS Variables pointing to CSS Custom Properties
+$color-bg-primary: var(--color-bg-primary);
+$color-text-primary: var(--color-text-primary);
+$color-text-secondary: var(--color-text-secondary);
+$color-accent: var(--color-accent);
+$color-icon-inactive: var(--color-icon-inactive);
+$color-icon-active: var(--color-icon-hover);
+$color-bar-bg: var(--color-bar-bg);
+$color-shadow: var(--color-shadow);
+
+// Typography
+$font-family-primary: 'Barlow', sans-serif;
+$font-size-base: 16px;
+$font-size-quote: 2rem;
+$font-size-author: 1.2rem;
+
+// Spacing
+$spacing-unit: 8px;
+$spacing-md: $spacing-unit * 2;
+$spacing-lg: $spacing-unit * 4;
