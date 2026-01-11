@@ -50,8 +50,20 @@
 
       <!-- Filter Toggle -->
       <button (click)="toggleFilter()" class="btn-icon" data-tooltip="Browse Categories"
-        [class.active]="(activeCategory$ | async)">
+        [class.active]="(activeCategory$ | async) || (activeAuthor$ | async)">
         <i class="fa-solid fa-filter"></i>
+      </button>
+
+      <!-- Share Menu -->
+      <button (click)="toggleLike()" class="btn-icon" [class.active]="isLiked()"
+        [attr.data-tooltip]="isLiked() ? 'Unlike' : 'Like'">
+        <i [class]="isLiked() ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+      </button>
+
+      <!-- Bookmark Button -->
+      <button (click)="toggleBookmark()" class="btn-icon" [class.active]="isBookmarked()"
+        [attr.data-tooltip]="isBookmarked() ? 'Remove Bookmark' : 'Bookmark'">
+        <i [class]="isBookmarked() ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'"></i>
       </button>
 
       <!-- Share Menu -->
@@ -89,6 +101,11 @@
           isFullscreen() ? 'Exit Fullscreen' : 'Enter Fullscreen'
         ">
         <i class="fa-solid" [ngClass]="isFullscreen() ? 'fa-compress' : 'fa-expand'"></i>
+      </button>
+
+      <!-- Info Toggle -->
+      <button (click)="toggleInfo()" class="btn-icon" data-tooltip="Quote Details" [class.active]="isInfoOpen()">
+        <i class="fa-solid fa-circle-info"></i>
       </button>
     </div>
   </div>
@@ -146,6 +163,53 @@
           <i class="fa-solid fa-lock" *ngIf="(activeAuthor$ | async) === auth"
             style="font-size: 0.7em; margin-left: 4px;"></i>
         </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Overlay -->
+  <div class="category-overlay-backdrop info-overlay" *ngIf="isInfoOpen()" (click)="closeInfo()">
+    <div class="category-overlay-content info-content" (click)="$event.stopPropagation()">
+      <div class="overlay-header">
+        <h2>Quote Details</h2>
+        <button class="btn-close" (click)="closeInfo()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="info-body">
+        <div class="info-quote-preview">
+          <span class="preview-number">#{{ quote()?.number }}</span>
+          <p class="preview-text">"{{ quote()?.content }}"</p>
+          <p class="preview-author">— {{ quote()?.author }}</p>
+        </div>
+
+        <p class="post-date">Posted {{ mockDate }}</p>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="label">Views</span>
+            <span class="value">{{ mockViews | number }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Saves</span>
+            <span class="value">{{ mockSaves | number }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Likes</span>
+            <span class="value">{{ mockLikes | number }}</span>
+          </div>
+        </div>
+
+        <div class="tags-section">
+          <h3>Tags</h3>
+          <div class="category-grid">
+            <span *ngFor="let cat of quote()?.categories" class="hashtag"
+              [class.active]="(activeCategory$ | async) === cat" (click)="toggleCategory(cat); closeInfo()">
+              #{{ cat }}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
