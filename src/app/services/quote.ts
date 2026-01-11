@@ -36,15 +36,31 @@ export class QuoteService {
 
   getUniqueCategories(): Observable<string[]> {
     return this.quotes$.pipe(
-      map(quotes => {
+      map((quotes) => {
         const categories = new Set<string>();
-        quotes.forEach(q => {
+        quotes.forEach((q) => {
           if (q.categories) {
-            q.categories.forEach(c => categories.add(c));
+            q.categories.forEach((c) => categories.add(c));
           }
         });
         return Array.from(categories).sort();
-      })
+      }),
+    );
+  }
+
+  getCategoryCounts(): Observable<Record<string, number>> {
+    return this.quotes$.pipe(
+      map((quotes) => {
+        const counts: Record<string, number> = {};
+        quotes.forEach((q) => {
+          if (q.categories) {
+            q.categories.forEach((c) => {
+              counts[c] = (counts[c] || 0) + 1;
+            });
+          }
+        });
+        return counts;
+      }),
     );
   }
 

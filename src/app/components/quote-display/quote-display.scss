@@ -142,11 +142,28 @@
     font-weight: 600;
     box-shadow: 0 4px 12px rgba($color-accent, 0.4);
 
+    .count {
+      background-color: rgba($color-bg-primary, 0.2); // Subtle bg for count when active
+      color: $color-bg-primary;
+    }
+
     &:hover {
       // Sass lighten() fails on CSS vars, use filter instead
       filter: brightness(1.1);
       transform: translateY(-2px);
     }
+  }
+
+  .count {
+    font-size: 0.8em;
+    opacity: 0.6;
+    margin-left: 2px;
+    font-weight: 400;
+    transition: all 0.2s ease;
+  }
+
+  &:hover .count {
+    opacity: 1;
   }
 }
 

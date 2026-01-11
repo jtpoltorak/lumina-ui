@@ -18,7 +18,7 @@
         <span *ngFor="let cat of q.categories" class="hashtag" [class.active]="(activeCategory$ | async) === cat"
           (click)="toggleCategory(cat)"
           [attr.title]="(activeCategory$ | async) === cat ? 'Unlock category' : 'Lock to this category'">
-          #{{ cat }}
+          #{{ cat }} <span class="count">({{ categoryCounts()[cat] || 0 }})</span>
           <i class="fa-solid fa-lock" *ngIf="(activeCategory$ | async) === cat"
             style="font-size: 0.7em; margin-left: 4px;"></i>
         </span>
@@ -117,7 +117,7 @@
         </span>
         <span *ngFor="let cat of allCategories$ | async" class="hashtag"
           [class.active]="(activeCategory$ | async) === cat" (click)="selectCategory(cat)">
-          #{{ cat }}
+          #{{ cat }} <span class="count">({{ categoryCounts()[cat] || 0 }})</span>
           <i class="fa-solid fa-lock" *ngIf="(activeCategory$ | async) === cat"
             style="font-size: 0.7em; margin-left: 4px;"></i>
         </span>

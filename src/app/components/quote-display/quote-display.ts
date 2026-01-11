@@ -51,6 +51,7 @@ export class QuoteDisplayComponent implements OnInit {
   // Expose active category to template
   activeCategory$: any;
   allCategories$: any;
+  categoryCounts = signal<Record<string, number>>({});
 
   isFilterOpen = signal(false);
 
@@ -65,6 +66,9 @@ export class QuoteDisplayComponent implements OnInit {
 
   ngOnInit() {
     this.handleInitialLoad();
+    this.quoteService.getCategoryCounts().subscribe((counts) => {
+      this.categoryCounts.set(counts);
+    });
   }
 
   toggleFilter() {
