@@ -4,7 +4,6 @@ import { AboutComponent } from './components/pages/about';
 import { ContactComponent } from './components/pages/contact';
 import { PrivacyPolicyComponent } from './components/pages/privacy';
 import { SubmitQuoteComponent } from './components/pages/submit-quote';
-import { ReportIssueComponent } from './components/report-issue/report-issue';
 
 export const routes: Routes = [
   { path: '', component: QuoteDisplayComponent },
@@ -12,6 +11,5 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'privacy', component: PrivacyPolicyComponent },
   { path: 'submit', component: SubmitQuoteComponent },
-  { path: 'report-issue', component: ReportIssueComponent },
   { path: '**', redirectTo: '' },
 ];
