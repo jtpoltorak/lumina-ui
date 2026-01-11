@@ -48,12 +48,18 @@ export class QuoteDisplayComponent implements OnInit {
   currentYear = new Date().getFullYear();
   isFullscreen = signal(false);
 
-  // Expose active category to template
+  // Expose active category/author to template
   activeCategory$: any;
   allCategories$: any;
   categoryCounts = signal<Record<string, number>>({});
 
+  activeAuthor$: any;
+  allAuthors$: any;
+  authorCounts = signal<Record<string, number>>({});
+
+  // Filter overlay modes
   isFilterOpen = signal(false);
+  filterMode = signal<'categories' | 'authors'>('categories');
 
   constructor(
     private quoteService: QuoteService,
@@ -62,12 +68,18 @@ export class QuoteDisplayComponent implements OnInit {
   ) {
     this.activeCategory$ = this.quoteService.activeCategory$;
     this.allCategories$ = this.quoteService.getUniqueCategories();
+
+    this.activeAuthor$ = this.quoteService.activeAuthor$;
+    this.allAuthors$ = this.quoteService.getUniqueAuthors();
   }
 
   ngOnInit() {
     this.handleInitialLoad();
     this.quoteService.getCategoryCounts().subscribe((counts) => {
       this.categoryCounts.set(counts);
+    });
+    this.quoteService.getAuthorCounts().subscribe((counts) => {
+      this.authorCounts.set(counts);
     });
   }
 
@@ -79,6 +91,10 @@ export class QuoteDisplayComponent implements OnInit {
     this.isFilterOpen.set(false);
   }
 
+  setFilterMode(mode: 'categories' | 'authors') {
+    this.filterMode.set(mode);
+  }
+
   selectCategory(category: string) {
     this.toggleCategory(category);
     this.closeFilter();
@@ -87,13 +103,25 @@ export class QuoteDisplayComponent implements OnInit {
   toggleCategory(category: string) {
     const currentActive = this.quoteService.getActiveCategory();
     if (currentActive === category) {
-      // If clicking the currently active category, unlock it (clear filter)
       this.quoteService.setCategory(null);
     } else {
-      // Otherwise, lock to this category
       this.quoteService.setCategory(category);
     }
-    // After toggling, we probably want to load a fresh quote that respects the new filter
+    this.loadNewQuote();
+  }
+
+  selectAuthor(author: string) {
+    this.toggleAuthor(author);
+    this.closeFilter();
+  }
+
+  toggleAuthor(author: string) {
+    const currentActive = this.quoteService.getActiveAuthor();
+    if (currentActive === author) {
+      this.quoteService.setAuthor(null);
+    } else {
+      this.quoteService.setAuthor(author);
+    }
     this.loadNewQuote();
   }
 

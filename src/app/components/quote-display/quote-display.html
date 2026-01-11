@@ -13,7 +13,12 @@
       <p class="quote-text" [@fadeAnimation]="quote()?.id">
         {{ quote()?.content }}
       </p>
-      <p class="quote-author">{{ q.author }}</p>
+      <p class="quote-author" [class.active]="(activeAuthor$ | async) === q.author" (click)="toggleAuthor(q.author)"
+        [attr.title]="(activeAuthor$ | async) === q.author ? 'Unlock author' : 'Lock to this author'">
+        {{ q.author }}
+        <i class="fa-solid fa-lock" *ngIf="(activeAuthor$ | async) === q.author"
+          style="font-size: 0.6em; margin-left: 6px; vertical-align: middle;"></i>
+      </p>
       <div class="quote-categories">
         <span *ngFor="let cat of q.categories" class="hashtag" [class.active]="(activeCategory$ | async) === cat"
           (click)="toggleCategory(cat)"
@@ -104,21 +109,41 @@
   <div class="category-overlay-backdrop" *ngIf="isFilterOpen()" (click)="closeFilter()">
     <div class="category-overlay-content" (click)="$event.stopPropagation()">
       <div class="overlay-header">
-        <h2>Explore Categories</h2>
+        <h2>Explore</h2>
         <button class="btn-close" (click)="closeFilter()">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <div class="category-grid">
+      <div class="filter-tabs">
+        <button class="tab-btn" [class.active]="filterMode() === 'categories'"
+          (click)="setFilterMode('categories')">Categories</button>
+        <button class="tab-btn" [class.active]="filterMode() === 'authors'"
+          (click)="setFilterMode('authors')">Authors</button>
+      </div>
+
+      <div class="category-grid" *ngIf="filterMode() === 'categories'">
         <span class="hashtag" [class.active]="(activeCategory$ | async) === null" (click)="selectCategory(null!)"
           style="justify-content: center;">
-          All Quotes
+          All Categories
         </span>
         <span *ngFor="let cat of allCategories$ | async" class="hashtag"
           [class.active]="(activeCategory$ | async) === cat" (click)="selectCategory(cat)">
           #{{ cat }} <span class="count">({{ categoryCounts()[cat] || 0 }})</span>
           <i class="fa-solid fa-lock" *ngIf="(activeCategory$ | async) === cat"
+            style="font-size: 0.7em; margin-left: 4px;"></i>
+        </span>
+      </div>
+
+      <div class="category-grid" *ngIf="filterMode() === 'authors'">
+        <span class="hashtag" [class.active]="(activeAuthor$ | async) === null" (click)="selectAuthor(null!)"
+          style="justify-content: center;">
+          All Authors
+        </span>
+        <span *ngFor="let auth of allAuthors$ | async" class="hashtag author-tag"
+          [class.active]="(activeAuthor$ | async) === auth" (click)="selectAuthor(auth)">
+          {{ auth }} <span class="count">({{ authorCounts()[auth] || 0 }})</span>
+          <i class="fa-solid fa-lock" *ngIf="(activeAuthor$ | async) === auth"
             style="font-size: 0.7em; margin-left: 4px;"></i>
         </span>
       </div>
