@@ -1,0 +1,170 @@
+@import '../../../styles/utils/variables';
+
+.report-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: $color-bg-primary;
+    color: $color-text-primary;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.report-card {
+    width: 100%;
+    max-width: 500px;
+    background: var(--color-bar-bg); // Use variable if possible, fallback needed if not global
+    border: 1px solid rgba($color-text-primary, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 30px $color-shadow;
+
+    .card-header {
+        margin-bottom: 24px;
+        text-align: center;
+
+        h2 {
+            font-family: $font-family-primary;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: $color-text-secondary;
+            font-family: 'Barlow', sans-serif;
+        }
+    }
+
+    .reported-quote-preview {
+        background-color: rgba($color-text-primary, 0.05);
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        border-left: 4px solid $color-accent;
+
+        blockquote {
+            font-family: $font-family-primary;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: $color-text-primary;
+            margin: 0 0 8px 0;
+            line-height: 1.4;
+        }
+
+        cite {
+            display: block;
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.9rem;
+            color: $color-text-secondary;
+            font-style: normal;
+            font-weight: 500;
+            text-align: right;
+        }
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        font-family: 'Barlow', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: $color-text-primary;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba($color-text-primary, 0.2);
+        background: transparent;
+        color: $color-text-primary;
+        font-family: 'Barlow', sans-serif;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: $color-accent;
+            box-shadow: 0 0 0 3px rgba($color-accent, 0.2);
+        }
+
+        option {
+            background-color: var(--color-bar-bg);
+            color: $color-text-primary;
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    input[readonly] {
+        background-color: rgba($color-text-primary, 0.05);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+
+    button {
+        font-family: 'Barlow', sans-serif;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+    }
+
+    .btn-cancel {
+        background: transparent;
+        border: 1px solid rgba($color-text-primary, 0.2);
+        color: $color-text-primary;
+
+        &:hover {
+            background: rgba($color-text-primary, 0.05);
+        }
+    }
+
+    .btn-submit {
+        background: $color-accent;
+        border: none;
+        color: $color-bg-primary;
+
+        &:hover:not([disabled]) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba($color-accent, 0.3);
+        }
+
+        &[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
