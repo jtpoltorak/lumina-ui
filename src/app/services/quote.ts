@@ -22,6 +22,10 @@ export class QuoteService {
   private activeCategorySignal = new BehaviorSubject<string | null>(null);
   activeCategory$ = this.activeCategorySignal.asObservable();
 
+  // State for active author filter
+  private activeAuthorSignal = new BehaviorSubject<string | null>(null);
+  activeAuthor$ = this.activeAuthorSignal.asObservable();
+
   constructor(private http: HttpClient) {
     this.quotes$ = this.http
       .get<Quote[]>(this.quotesUrl)
@@ -64,14 +68,53 @@ export class QuoteService {
     );
   }
 
+  getUniqueAuthors(): Observable<string[]> {
+    return this.quotes$.pipe(
+      map((quotes) => {
+        const authors = new Set<string>();
+        quotes.forEach((q) => authors.add(q.author));
+        return Array.from(authors).sort();
+      }),
+    );
+  }
+
+  getAuthorCounts(): Observable<Record<string, number>> {
+    return this.quotes$.pipe(
+      map((quotes) => {
+        const counts: Record<string, number> = {};
+        quotes.forEach((q) => {
+          counts[q.author] = (counts[q.author] || 0) + 1;
+        });
+        return counts;
+      }),
+    );
+  }
+
   setCategory(category: string | null) {
     this.activeCategorySignal.next(category);
+    // Mutually exclusive: clear author if setting category
+    if (category) {
+      this.activeAuthorSignal.next(null);
+    }
     // When changing filters, we might want to clear history to allow re-seeing quotes
+    this.shownQuoteIds.clear();
+  }
+
+  setAuthor(author: string | null) {
+    this.activeAuthorSignal.next(author);
+    // Mutually exclusive: clear category if setting author
+    if (author) {
+      this.activeCategorySignal.next(null);
+    }
     this.shownQuoteIds.clear();
   }
 
   getActiveCategory(): string | null {
     return this.activeCategorySignal.value;
+  }
+
+  getActiveAuthor(): string | null {
+    return this.activeAuthorSignal.value;
   }
 
   getRandomQuote(): Observable<Quote> {
@@ -82,14 +125,19 @@ export class QuoteService {
         }
 
         const activeCategory = this.activeCategorySignal.value;
+        const activeAuthor = this.activeAuthorSignal.value;
 
-        // 1. Filter by category if active
-        let candidateQuotes = activeCategory
-          ? quotes.filter(q => q.categories && q.categories.includes(activeCategory))
-          : quotes;
+        // 1. Filter by category OR author (mutually exclusive)
+        let candidateQuotes = quotes;
+
+        if (activeCategory) {
+          candidateQuotes = quotes.filter(q => q.categories && q.categories.includes(activeCategory));
+        } else if (activeAuthor) {
+          candidateQuotes = quotes.filter(q => q.author === activeAuthor);
+        }
 
         if (candidateQuotes.length === 0) {
-          // Fallback if category has no quotes (shouldn't happen with correct data)
+          // Fallback if filter has no quotes (shouldn't happen with correct data)
           candidateQuotes = quotes;
         }
 
@@ -100,8 +148,7 @@ export class QuoteService {
 
         // 3. Reset history if all shown
         if (availableQuotes.length === 0) {
-          // If we exhausted the category, just reset history for that category
-          // (candidateQuotes are all quotes in that category)
+          // If we exhausted the filtered list, reset history for that scope
           candidateQuotes.forEach(q => this.shownQuoteIds.delete(q.id));
 
           return candidateQuotes[
