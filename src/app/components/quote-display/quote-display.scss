@@ -246,6 +246,53 @@
   // Removed margin-top: auto so it sits below the button, centered in the container flow
 }
 
+// Autoplay Button Styles
+.autoplay-btn {
+  position: relative;
+  display: flex !important; // Ensure flex for centering
+  align-items: center;
+  justify-content: center;
+
+  .progress-ring {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: 0;
+    pointer-events: none;
+
+    svg {
+      transform: rotate(-90deg); // Start from top
+    }
+
+    .ring-bg,
+    .ring-progress {
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .ring-bg {
+      stroke: rgba($color-text-primary, 0.1);
+    }
+
+    .ring-progress {
+      stroke: $color-accent;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.1s linear;
+    }
+  }
+
+  i {
+    z-index: 1;
+    font-size: 0.9em; // Slightly smaller icon
+  }
+
+  &.active {
+    color: $color-accent;
+  }
+}
+
 .btn-icon,
 .btn-fullscreen {
   background: transparent;

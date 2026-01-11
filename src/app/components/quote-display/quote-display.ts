@@ -5,6 +5,7 @@ import {
   OnInit,
   Inject,
   HostListener,
+  OnDestroy,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -44,7 +45,7 @@ import {
     ]),
   ],
 })
-export class QuoteDisplayComponent implements OnInit {
+export class QuoteDisplayComponent implements OnInit, OnDestroy {
   quote = signal<Quote | null>(null);
   currentYear = new Date().getFullYear();
   isFullscreen = signal(false);
@@ -57,6 +58,14 @@ export class QuoteDisplayComponent implements OnInit {
   activeAuthor$: any;
   allAuthors$: any;
   authorCounts = signal<Record<string, number>>({});
+
+  // Autoplay Logic
+  isAutoplayEnabled = signal(false);
+  autoplayProgress = signal(0); // 0 to 100
+  private timerInterval: any;
+  private readonly AUTOPLAY_DURATION = 15000; // 15 seconds
+  private readonly TICK_RATE = 100; // Update every 100ms
+
 
   // Filter overlay modes
   // Filter overlay modes
@@ -138,6 +147,46 @@ export class QuoteDisplayComponent implements OnInit {
     this.quoteService.getAuthorCounts().subscribe((counts) => {
       this.authorCounts.set(counts);
     });
+  }
+
+  ngOnDestroy() {
+    this.stopAutoplay();
+  }
+
+  toggleAutoplay() {
+    if (this.isAutoplayEnabled()) {
+      this.stopAutoplay();
+    } else {
+      this.startAutoplay();
+    }
+  }
+
+  startAutoplay() {
+    this.isAutoplayEnabled.set(true);
+    this.resetTimer();
+  }
+
+  stopAutoplay() {
+    this.isAutoplayEnabled.set(false);
+    clearInterval(this.timerInterval);
+    this.autoplayProgress.set(0);
+  }
+
+  resetTimer() {
+    clearInterval(this.timerInterval);
+    this.autoplayProgress.set(0);
+
+    let elapsed = 0;
+    this.timerInterval = setInterval(() => {
+      elapsed += this.TICK_RATE;
+      const progress = (elapsed / this.AUTOPLAY_DURATION) * 100;
+      this.autoplayProgress.set(Math.min(progress, 100));
+
+      if (elapsed >= this.AUTOPLAY_DURATION) {
+        this.loadNewQuote();
+        // loadNewQuote will handle resetting the timer if autoplay is still enabled
+      }
+    }, this.TICK_RATE);
   }
 
   toggleFilter() {
@@ -225,6 +274,11 @@ export class QuoteDisplayComponent implements OnInit {
     this.quoteService.getRandomQuote().subscribe((q) => {
       this.quote.set(q);
       this.updateUrl(q.id);
+
+      // Reset timer if autoplay is enabled
+      if (this.isAutoplayEnabled()) {
+        this.resetTimer();
+      }
     });
   }
 
