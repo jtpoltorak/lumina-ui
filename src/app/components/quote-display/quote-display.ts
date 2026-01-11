@@ -1,6 +1,7 @@
 import {
   Component,
   signal,
+  computed,
   OnInit,
   Inject,
   HostListener,
@@ -58,8 +59,64 @@ export class QuoteDisplayComponent implements OnInit {
   authorCounts = signal<Record<string, number>>({});
 
   // Filter overlay modes
+  // Filter overlay modes
   isFilterOpen = signal(false);
   filterMode = signal<'categories' | 'authors'>('categories');
+
+  // Info overlay state
+  isInfoOpen = signal(false);
+
+  // Mock Data Helpers
+  mockViews = Math.floor(Math.random() * 10000) + 500;
+  mockSaves = Math.floor(Math.random() * 200) + 10;
+  mockLikes = Math.floor(Math.random() * 1000) + 50;
+  mockDate = 'Jan 12, 2026';
+
+  // Like Logic
+  likedQuotes = signal<Set<string>>(new Set());
+
+  isLiked = computed(() => {
+    const q = this.quote();
+    return q ? this.likedQuotes().has(q.id) : false;
+  });
+
+  toggleLike() {
+    const q = this.quote();
+    if (q) {
+      this.likedQuotes.update(set => {
+        const newSet = new Set(set);
+        if (newSet.has(q.id)) {
+          newSet.delete(q.id);
+        } else {
+          newSet.add(q.id);
+        }
+        return newSet;
+      });
+    }
+  }
+
+  // Bookmark Logic
+  bookmarkedQuotes = signal<Set<string>>(new Set());
+
+  isBookmarked = computed(() => {
+    const q = this.quote();
+    return q ? this.bookmarkedQuotes().has(q.id) : false;
+  });
+
+  toggleBookmark() {
+    const q = this.quote();
+    if (q) {
+      this.bookmarkedQuotes.update(set => {
+        const newSet = new Set(set);
+        if (newSet.has(q.id)) {
+          newSet.delete(q.id);
+        } else {
+          newSet.add(q.id);
+        }
+        return newSet;
+      });
+    }
+  }
 
   constructor(
     private quoteService: QuoteService,
@@ -89,6 +146,14 @@ export class QuoteDisplayComponent implements OnInit {
 
   closeFilter() {
     this.isFilterOpen.set(false);
+  }
+
+  toggleInfo() {
+    this.isInfoOpen.update(v => !v);
+  }
+
+  closeInfo() {
+    this.isInfoOpen.set(false);
   }
 
   setFilterMode(mode: 'categories' | 'authors') {
