@@ -107,6 +107,12 @@
       <button (click)="toggleInfo()" class="btn-icon" data-tooltip="Quote Details" [class.active]="isInfoOpen()">
         <i class="fa-solid fa-circle-info"></i>
       </button>
+
+      <!-- Report Issue Button -->
+      <a [routerLink]="['/report-issue']" [queryParams]="{quoteId: quote()?.id, quoteNum: quote()?.number}"
+        class="btn-icon" data-tooltip="Report Issue">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </a>
     </div>
   </div>
 

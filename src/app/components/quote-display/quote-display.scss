@@ -261,6 +261,7 @@
   justify-content: center;
   font-size: clamp(1rem, 1.5vw, 1.3rem); // Scale icon size
   position: relative;
+  text-decoration: none; // Fix for anchor tags
 
   &:hover {
     color: $color-icon-active;
